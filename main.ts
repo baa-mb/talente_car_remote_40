@@ -2,7 +2,9 @@ function hole_neigung () {
     gerade = Math.min(Math.max(input.rotation(Rotation.Pitch), -45), 45)
     gerade = Math.round(gerade / g_empfind) * g_empfind
     kurve = Math.min(Math.max(input.rotation(Rotation.Roll), -45), 45)
+    kurve = Math.round(kurve / 15)
     kurve = Math.round(kurve / k_empfind) * k_empfind
+    serial.writeValue("x", kurve)
 }
 control.onEvent(EventBusSource.MICROBIT_ID_BUTTON_A, EventBusValue.MICROBIT_BUTTON_EVT_UP, function () {
     radio.sendValue("gerade", 0)
@@ -27,7 +29,7 @@ let alt_kurve = -99
 radio.setGroup(26)
 basic.showString("26")
 g_empfind = 5
-k_empfind = 5
+k_empfind = 1
 basic.showLeds(`
     . . . . .
     . . . . .
